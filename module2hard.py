@@ -10,14 +10,15 @@ def passWord(number, size_of_array):
         array.append(i)
         i += 1
 
-    for i in range (1, 20):
-        for j in range (i + 1, 20):
+    for i in range (1, size_of_array):
+        for j in range (i + 1, size_of_array):
             if number % (i + j) == 0:
                 result += str(i) + str(j)
 
     return (result)
 def head():
     choice = None
+    size_of_array = 20 # размер массива
     while True:
         choice = int(input ('\nВыберите как генерить число: '
                         '\n 1. случайно - введите 1, '
@@ -33,7 +34,7 @@ def head():
             if choice == 0:
                 print('\nЗакончили, спасибо')
                 break
-            print(f'\nПароль - {passWord(choice, 20)}\n')
+            print(f'\nПароль - {passWord(choice, size_of_array)}\n')
 
 head()
 
