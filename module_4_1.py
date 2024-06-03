@@ -1,5 +1,5 @@
 import fake_math as fake
-import true_math as true
+import true_math as  true
 
 def main():
     result1 = fake.divide(69, 3)
