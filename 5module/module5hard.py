@@ -1,4 +1,5 @@
-from random import random
+from os import remove
+from random import random, randint
 
 
 class Video:
@@ -27,9 +28,7 @@ class Database:
 
     def __init__(self, user: User):
         self.data = []
-        self.username = user.nickname
-        self.age = user.age
-        self.password = user.password
+
 
     def add_user(self, user: User):
         #self.data[username] = hash(password)
@@ -39,50 +38,46 @@ class Database:
     def find_user(self, username):
     # перебор по слоавврю если найден, то возвращаю 1 иначе 0
         for k in self.data:
-            if k == username:
+            if k.nickname == username:
                 return True
         return False
 
     def dell_user(self, username):
         # сделать проверку на наличие ключа в БД, возвращает 0, если все успешно и -1 есди не найден
-        if self.find_user(username):
-                del self.data[username]
-                print(' удален')
-                return
+        for k in self.data:
+            if k.nickname == username:
+                self.data.remove(k)
+                print('Пользователь удален')
+                return True
         else:
             print('Пользователь не найден')
+            return False
 
     def spisok_all_users_in_BD(self):
         for k in self.data:
             print(k.nickname, k.age, k.password)
 
-
     def fill_BD(self):
-        for k in range (0,10):
-           k = User('support' + str(k), 45, hash(str(random() * 10) + ' password '))
-           self.add_user(k)
-        #self.add_user(User('support3', 45, str(random() * 10) + ' password '))
-        #for k in range(0,10):
-           #self.add_user(User(k, k, str(random() * 10) +  ' password '))
-           #self.add_user(k, str(random() * 10) +  ' password ')
-        #for k in self.data:
-        #    print(k)
 
+        for k in range (0,10):
+           k = User('support' + str(k), randint(15, 90), hash(str(random() * 10) + ' password '))
+           self.add_user(k)
+        self.add_user(User("konst", 45, '123'))
     def login(self, username, password):
         for k in self.data:
-            if k == username:
-                if self.data[k] == hash(password):
+            if k.nickname == username:
+                if k.password == hash(password):
                     print('Прошёл')
                     return True
                 else:
-                    print('Парль не совпадает')
+                    print('Пароль не совпадает')
                     return False
 
 
 def reg(exemplar : Database):
     # проверка на наличие полльзователя в БД и регистрация нового
     while True:
-        new_user_name = input ('Введите логин (nили нажмите Enter для выхода):')
+        new_user_name = input ('Введите логин (или нажмите Enter для выхода):')
         if len(new_user_name) == 0:
             return False
         elif exemplar.find_user(new_user_name):
@@ -96,6 +91,8 @@ def reg(exemplar : Database):
 
                 exemplar.add_user(User(new_user_name, password, input('\nВаш возраст: ')))
                 return True
+            else:
+                print('Пароли не совпадают, начните сначала')
 
 
 if __name__ == '__main__':
@@ -103,8 +100,9 @@ if __name__ == '__main__':
     exemplar = Database(user)
     exemplar.fill_BD() #заполнение БД тестовыми данными
     while True:
-        ss = input('Добро пожаловать в Свой YouTube\n'
-              'Наберите 1 - если хотете зарегистрироваться\n'
+        ss = input('\nДобро пожаловать в Свой YouTube\n'
+                   '___________________________________\n'
+              'Наберите 1 - если хотите зарегистрироваться\n'
               'Наберите 2 - если регистрация уже прошла\n'
               'Наберите 3 - если хотите удалить пользователя\n'
               'Наберите 4 - для получения списка пользователей\n'     
@@ -122,7 +120,8 @@ if __name__ == '__main__':
             else:
                 print('Такого пользователя в базе не зарегистрировано')
         if ss == '3':
-            exemplar.dell_user(input('Введите имя: '))
+            kk = input('Введите имя: ')
+            exemplar.dell_user(kk)
         if ss == '4':
 
             exemplar.spisok_all_users_in_BD()
