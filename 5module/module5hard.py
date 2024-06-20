@@ -20,7 +20,7 @@ class User:
 
 class UrTube:
 
-    def __init__(self, users: [], videos: [], current_user: User):
+    def __init__(self, users: [], videos: [], current_user : User):
         self.users = users
         self.videos = videos
         self.current_user = current_user
@@ -34,7 +34,7 @@ class UrTube:
     def register(self, nickname: str, password: str, age: str):
         for k in self.users:
             if k.nickname == nickname:
-                print('\nПользователь существует ')
+                print(f'\nПользователь {nickname} существует ')
                 return False
         user = User(nickname, age, password)
         self.users.append(user)
@@ -83,7 +83,8 @@ class UrTube:
                 if self.current_user == None:
                     print('Войдите в аккаунт, чтобы смотреть видео')
                     return
-                if int (self.current_user.age) < 18 and (k.adult_mode == True):
+
+                if int(self.current_user.age) < 18 and (k.adult_mode == True):
                     print('Вам нет 18 лет, пожалуйста покиньте страницу')
                     return
                 else:
@@ -95,34 +96,32 @@ class UrTube:
 
 
 if __name__ == '__main__':
-    hill = UrTube([],[],None)
-    hill.fill_bd()
+
+    ur = UrTube([],[],None)
     v1 = Video('Лучший язык программирования 2024 года', 200)
     v2 = Video('Для чего девушкам парень программист?', 10, adult_mode=True)
-    v3 = Video('Лучший язык программирования 2024 года', 200)
-    v4 = Video('Для чего девушкам парень программист?', 10, adult_mode=True)
 
     # Добавление видео
-    hill.add(v1, v2, v3, v4)
-#    hill.list_video()
-    print(hill.get_videos('лучший'))
-    print(hill.get_videos('ПРОГ'))
+    ur.add(v1, v2)
 
-    hill.register('vasya_pupkin', 'F8098FM8fjm9jmi', 55)
-    print(hill.current_user)
+    # Проверка поиска
+    print(ur.get_videos('лучший'))
+    print(ur.get_videos('ПРОГ'))
 
-    hill.register('vasya_pupkin', 'F8098FM8fjm9jmi', 55)
-    print(hill.current_user)
-    #hill.log_out()
+    # Проверка на вход пользователя и возрастное ограничение
+    ur.watch_video('Для чего девушкам парень программист?')
+    ur.register('vasya_pupkin', 'lolkekcheburek', 13)
+    ur.watch_video('Для чего девушкам парень программист?')
+    ur.register('urban_pythonist', 'iScX4vIJClb9YQavjAgF', 25)
+    ur.watch_video('Для чего девушкам парень программист?')
 
-    #hill.watch_video('Для чего девушкам парень программист?')
+    # Проверка входа в другой аккаунт
+    ur.register('vasya_pupkin', 'F8098FM8fjm9jmi', 55)
+    print(ur.current_user.nickname)
 
-    #hill.register('vasya_pupkin', 'lolkekcheburek', 64)
-    hill.watch_video('Для чего девушкам парень программист?')
-
-    #for i in hill.get_videos('парень'):
-    #    print(i)
-
+    # Попытка воспроизведения несуществующего видео
+    ur.watch_video('Лучший язык программирования 2024 года!')
+    hill = UrTube
     while True:
         choice = input('\nДобро пожаловать в Свой YouTube\n'
                    '___________________________________\n'
@@ -150,7 +149,7 @@ if __name__ == '__main__':
         if choice == '4':
             hill.show_users()
 
-
+#КОД НИЖЕ ДЛЯ ТЕНИРОВКИ
 class Database:
 
     def __init__(self, user: User):
