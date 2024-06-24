@@ -1,14 +1,17 @@
+from typing import List
 
 
 class Vehicle:
 
+    __COLOR_VARIANTS: list[str] = ['blue', 'red', 'green', 'black', 'white']
 
-    def __init__(self, owner: str, __model: str,  __color: str, __engine_power: int):
+    def __init__(self, owner, model,  color, engine_power):
         self.owner = owner
-        self.__model = __model
-        self.__engine_power = __engine_power
-        self.__color = __color
-        self.__COLOR_VARIANTS = ['blue', 'red', 'green', 'black', 'white']
+        self.__model = model
+        self.__engine_power = engine_power
+        self.__color = color
+
+
     def get_model(self):
         return ' Модель: ' + str(self.__model) + '\n'
 
@@ -32,11 +35,9 @@ class Vehicle:
         print(f' Нельзя сменить цвет на {new_color}.')
 
 
-
-
-
 class Sedan(Vehicle):
     __PASSENGERS_LIMIT = 5
+
 
 vehicle1 = Sedan('Fedos', 'Toyota Mark II', 'blue', 500)
 
