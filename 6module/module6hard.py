@@ -6,6 +6,7 @@ class Figure:
     def __init__(self, color, *sides):
         self.__sides = []
         self.__color = [None, None, None]
+        self.filled = False
         if self.__is_valid_color(color[0], color[1], color[2]):
             self.set_color(color[0], color[1], color[2])
         if self.sides_count == len(sides) and self.__is_valid_sides(*sides):
@@ -35,6 +36,7 @@ class Figure:
             temp.append(g)
             temp.append(b)
             self.__color = temp
+            self.filled = True
             return True
 
     def __is_valid_sides(self, *args):
