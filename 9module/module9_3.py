@@ -4,7 +4,7 @@ class EvenNumbers:
             end = start + 1
         self.start = start-1
         self.end = end
-        self.i = 0
+        self.i = start
     def __iter__(self):
         return self
     def __next__(self):
