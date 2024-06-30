@@ -18,7 +18,7 @@ def is_prime(func):
 
 @is_prime
 def sum_three(one, two, three):
-    if one <= 0 or two < 0 or three < 0:
+    if one < 0 or two < 0 or three < 0:
         return -1
     return one + two + three
 
