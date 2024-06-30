@@ -15,6 +15,6 @@ class EvenNumbers:
             if self.i % 2 == 0:
                 return (self.i)
 
-spisok = EvenNumbers(0, 25)
+spisok = EvenNumbers(10, 25)
 for i in spisok:
     print(i)
