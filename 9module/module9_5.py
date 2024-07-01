@@ -5,15 +5,18 @@ def is_prime(func):
         s = func(*args, **kwargs)
         #print(s)
         if s == -1:
-            return f'ожидались числа > 0'
+            print(f'ожидались числа > 0')
+            return 0
         marker = 0
         for i in range(2, s // 2 + 1):
             if (s % i == 0):
                 marker += 1
         if marker <= 0:
-            return f'{s} простое'
+            print(f'{s} простое')
+            return s
         else:
-            return f'{s} составное'
+            print(f'{s} составное')
+            return s
     return wrapper
 
 @is_prime
