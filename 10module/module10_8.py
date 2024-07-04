@@ -22,8 +22,8 @@ class WarehouseManager:
             proc = Process(target=self.process_request, args=(request,))
             processes.append(proc)
             proc.start()
-        for p in processes:
-            p.join()
+        for proc in processes:
+            proc.join()
 
 
 if __name__ == '__main__':
