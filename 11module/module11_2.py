@@ -23,7 +23,6 @@ def introspection_info(obj):
     #dict['аттрибуты объекта'] = dir(obj)
     metod = []
     attr = []
-    method_list = []
     for attribute in dir(obj):
         attribute_value = getattr(obj, attribute)
         if callable(attribute_value):
