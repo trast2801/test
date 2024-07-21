@@ -52,6 +52,7 @@ async def send_calories(message, state):
            f' Ваша норма каллорий (жен) = {callor_women}')
 
     await message.answer(msg)
+    await state.finish()
     # 10 x вес (кг) + 6,25 x рост (см) – 5 x возраст (г) – 161.
 
 
