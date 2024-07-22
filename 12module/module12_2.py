@@ -1,7 +1,6 @@
 import unittest
 from unittest import TestCase
 
-
 class Runner:
     def __init__(self, name, speed=5):
         self.name = name

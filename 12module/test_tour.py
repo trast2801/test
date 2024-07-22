@@ -2,7 +2,7 @@ import module12_2
 import unittest
 
 class TournamentTest(unittest.TestCase):
-
+    is_frozen = True
     @classmethod
     def setUpClass(cls):
         cls.all_results = {}
@@ -11,6 +11,7 @@ class TournamentTest(unittest.TestCase):
         self.runer_1 = module12_2.Runner('Усэйн', 10)
         self.runer_2 = module12_2.Runner('Андрей', 9)
         self.runer_3 = module12_2.Runner('Ник', 3)
+        self.is_frozen = True
 
     @classmethod
     def tearDownClass(cls):
@@ -20,6 +21,7 @@ class TournamentTest(unittest.TestCase):
                 print(f'{key}: {value.name}', end=' ', flush=True)
             print()
 
+    @unittest.skipUnless(is_frozen, 'Тесты в этом кейсе заморожены')
     def test_turn1(self):
         # test = [[self.runer_1, self.runer_3], [self.runer_2, self.runer_3],
         #         [self.runer_1, self.runer_2, self.runer_3]]
@@ -29,20 +31,22 @@ class TournamentTest(unittest.TestCase):
         self.assertTrue(result[list(result.keys())[-1]] == 'Ник', 'Ошибка! Последним должен быть Ник')
         self.all_results['test_turn1'] = result
 
+    @unittest.skipUnless(is_frozen, 'Тесты в этом кейсе заморожены')
     def test_turn2(self):
         turn_2 = module12_2.Tournament(90, self.runer_2, self.runer_3)
         result = turn_2.start()
         self.assertTrue(result[list(result.keys())[-1]] == 'Ник', 'Ошибка! Последним должен быть Ник')
         self.all_results['test_turn2'] = result
 
+    @unittest.skipUnless(is_frozen, 'Тесты в этом кейсе заморожены')
     def test_turn3(self):
         turn_3 = module12_2.Tournament(90, self.runer_1, self.runer_2, self.runer_3)
         result = turn_3.start()
         self.assertTrue(result[list(result.keys())[-1]] == 'Ник', 'Ошибка! Последним должен быть Ник')
         self.all_results['test_turn3'] = result
 
-if __name__ == "__main__":
+'''if __name__ == "__main__":
 
     unittest(module12_2)
-
+'''
 
