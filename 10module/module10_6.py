@@ -1,13 +1,8 @@
+
 import threading
 import queue
 import time
 
-class Customer:
-    def __init__(self, name):
-        self.name = name
-
-    def get_name(self):
-        return self.name
 
 class Table:
     def __init__(self, number):
@@ -22,22 +17,22 @@ class Cafe:
         self.tables = tables
 
     def customer_arrival(self):
-        for i in range(1, 21):  # ограничение числа посетителей
-                customer = Customer(i)
-                print(f"Посетитель номер {i} прибыл")
-                time.sleep(1)
-                self.queue.put(customer)
+        for i in range(1, 21):
+            time.sleep(1)
+            print(f"Посетитель номер {i} прибыл")
+            customer = {"number": i}
+            self.queue.put(customer)
 
     def serve_customer(self, customer):
         for table in self.tables:
             if not table.is_busy:
                 table.is_busy = True
-                print(f"Посетитель номер {customer.get_name()} ожидает свободный стол (помещение в очередь)")
+                print(f"Посетитель номер {customer['number']} ожидает свободный стол (помещение в очередь)")
                 time.sleep(5)
                 table.is_busy = False
-                print(f"Посетитель номер {customer.get_name()} сел за стол {table.number} (начало обслуживания)")
-                return print(f"Посетитель номер {customer.get_name()} покушал и ушёл (конец обслуживания)")
-
+                print(f"Посетитель номер {customer['number']} сел за стол {table.number} (начало обслуживания)")
+                return print(f"Посетитель номер {customer['number']} покушал и ушёл (конец обслуживания)")
+        self.queue.put(customer)
 
 
 def customer_thread(cafe):
