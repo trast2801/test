@@ -34,7 +34,7 @@ def mul(s):
 '''
 #lambda
 #------------------------------------
-first = 'Мама мыла раму'
+first  = 'Мама мыла раму'
 second = 'Рамена мало было'
 
 def tst (one, two):
@@ -43,9 +43,7 @@ def tst (one, two):
         else:
                 return False
 
-result = map(tst, list(second), list(first))
-
-print (list(result))
+print (list(map(lambda x, y: True if x == y else False, second, first)))
 
 #замыкание
 #-----------------------------------
