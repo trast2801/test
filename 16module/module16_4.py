@@ -28,6 +28,8 @@ async def create_user(username: str, age: int):
     new_user = User(id=len(users) + 1, username=username, age=age)
     users.append(new_user)
     return new_user
+
+# Обновление пользователя
 @app.put("/user/{user_id}/{username}/{age}")
 async def update_user(user_id: int , username: str, age: int):
     global users
@@ -37,8 +39,6 @@ async def update_user(user_id: int , username: str, age: int):
     user.username = username
     user.age = age
     return user
-
-
 
 @app.delete("/user/{user_id}")
 async def delete_user(user_id: int = Path(...)):
