@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+
+        {% block pagename %}
+            <div style="text-align:center;">
+                <meta charset="UTF-8">
+                <title>{{title}}</title>
+
+                <link rel = 'stylesheet' type="text/css" href='{% static "style.css" %}'>
+            </div>
+        {% endblock %}
+
+
+</head>
+<body>
+
+        {% block menu %}
+            <div style="text-align:center;">
+                <h1>{{head}}</h1>
+                <ul>
+                    <li><a href=#>Главная</a></li>
+                    <li><a href="http://127.0.0.1:8000/platform/games">Магазин</a></li>
+                    <li><a href="http://127.0.0.1:8000/platform/cart">Корзина</a></li>
+
+                </ul>
+            </div>
+        {% endblock %}
+
+        {% block content %}
+            <ul>
+                {% for i in catalog %}
+                    <li>
+                        {{ i }}
+                            <button>
+                                <h4> Купить</h4>
+                            </button>
+                    </li>
+                {% endfor %}
+        </ul>
+        {% endblock %}
+
+        {% block dict_ %}
+            <ul>
+                {% for game in games %}
+                    <li>{{ game }}  <button> <h4> Купить </h4> </button> </li>
+                {% endfor %}
+            </ul>
+        {% endblock %}
+
+</body>
+</html>
